@@ -1,0 +1,45 @@
+.row{
+    padding: 20px;
+}
+div{
+    background-color: #00358e;
+    color: white;
+}
+
+@media(min-width: 576px){
+    #profile{
+        position: absolute;
+        width: 15%;
+        border-radius: 100%;
+        box-shadow: 3px 3px 3px grey;
+        margin-top: -10%;
+        left: 5%;
+        right: 5%;
+    }
+    #datos-basicos{
+        left: 3%;
+    }
+    #name{
+        margin-top: 30%;
+        font-weight: bold;
+    }
+}
+@media(max-width: 575.99px){
+    div{
+        text-align: center;
+    }
+    #profile{
+        position: absolute;
+        width: 30%;
+        border-radius: 100%;
+        box-shadow: 3px 3px 3px grey;
+        margin-top: -20%;
+        left: 35%;
+        right: 35%;
+        
+    }
+    #name{
+        font-weight: bold;
+        margin-top: 15%;
+    }
+}

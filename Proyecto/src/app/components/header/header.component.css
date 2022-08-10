@@ -1,8 +1,18 @@
 div{
-    background-color: #a1b5cb;
+    background-color: #00358e;/*#a1b5cb;*/
+    min-height: 70px;
 }
 
 app-social{
     float: right;
-    margin-top: 25px;
+    padding: 10px;
+/*    margin-top: 10px;
+    margin-bottom: 10px;*/
+}
+
+app-logo-ap{
+    float: left;
+    padding: 10px;
+/*    margin-top: 10px;
+    margin-bottom: 10px;*/
 }
