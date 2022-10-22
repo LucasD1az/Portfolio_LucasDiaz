@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { person } from 'src/app/model/person.model';
+import { PersonService } from 'src/app/service/person.service';
 
 @Component({
   selector: 'app-abstract',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./abstract.component.css']
 })
 export class AbstractComponent implements OnInit {
+  person: person = new person("","","");
 
-  constructor() { }
+  constructor(public personService: PersonService) { }
 
   ngOnInit(): void {
+    this.personService.getPerson().subscribe(data => {this.person = data});
   }
 
 }

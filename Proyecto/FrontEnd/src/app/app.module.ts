@@ -12,6 +12,9 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { LanguagesComponent } from './components/languages/languages.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { FooterComponent } from './components/footer/footer.component';
     SkillsComponent,
     LanguagesComponent,
     ProjectsComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,9 @@ import { FooterComponent } from './components/footer/footer.component';
       outerStrokeColor: "#78C000",
       innerStrokeColor: "#C7E596",
       animationDuration: 300,
-    })
+    }),
+
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
