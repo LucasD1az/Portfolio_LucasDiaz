@@ -11,6 +11,6 @@ export class PersonService {
   constructor(private http: HttpClient) { }
 
   public getPerson(): Observable<person>{
-    return this.http.get<person>(this.URL+'/traer/perfil');
+    return this.http.get<person>(this.URL+'traer/perfil');
   }
 }
