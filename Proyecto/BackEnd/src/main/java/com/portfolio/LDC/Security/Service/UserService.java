@@ -29,7 +29,7 @@ public class UserService {
         return iuserRepository.existsByUserName(userName);
     }
     
-    public boolean existesByEmail(String email){
+    public boolean existsByEmail(String email){
         return iuserRepository.existsByEmail(email);
     }
     
