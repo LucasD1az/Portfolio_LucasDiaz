@@ -1,12 +1,14 @@
-export class person{
+export class Person{
     id?: number;
-    firstName: String;
-    lastName: String;
-    img: String;
+    firstName: string;
+    lastName: string;
+    description: string;
+    img: string;
 
-    constructor(firstName: String, lastName: String, img: String){
+    constructor(firstName: string, lastName: string, description: string, img: string){
         this.firstName = firstName;
         this.lastName = lastName;
+        this.description = description;
         this.img = img;
     }
 }

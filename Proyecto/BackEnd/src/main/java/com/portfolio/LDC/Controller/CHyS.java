@@ -4,10 +4,10 @@
  */
 package com.portfolio.LDC.Controller;
 
-import com.portfolio.LDC.Dto.dtoExperience;
-import com.portfolio.LDC.Entity.Experience;
+import com.portfolio.LDC.Dto.dtoHyS;
+import com.portfolio.LDC.Entity.HyS;
 import com.portfolio.LDC.Security.Controller.Mensaje;
-import com.portfolio.LDC.Service.SExperience;
+import com.portfolio.LDC.Service.SHyS;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,71 +28,71 @@ import org.springframework.web.bind.annotation.RestController;
  * @author lucas
  */
 @RestController
-@RequestMapping("/exp")
 @CrossOrigin(origins = {"https://frontend-ap-8746a.web.app", "http://localhost:4200"})
-public class CExperience {
+@RequestMapping("/skill")
+public class CHyS {
 
     @Autowired
-    SExperience sExperience;
+    SHyS sHyS;
 
     @GetMapping("/lista")
-    public ResponseEntity<List<Experience>> list() {
-        List<Experience> list = sExperience.list();
+    public ResponseEntity<List<HyS>> list() {
+        List<HyS> list = sHyS.list();
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Experience> getById(@PathVariable("id") int id) {
-        if (!sExperience.existsById(id)) {
+    public ResponseEntity<HyS> getById(@PathVariable("id") int id) {
+        if (!sHyS.existsById(id)) {
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         }
-        Experience experience = sExperience.getOne(id).get();
-        return new ResponseEntity(experience, HttpStatus.OK);
+        HyS hys = sHyS.getOne(id).get();
+        return new ResponseEntity(hys, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody dtoExperience dtoexp) {
-        if (StringUtils.isBlank(dtoexp.getNameE())) {
+    public ResponseEntity<?> create(@RequestBody dtoHyS dtohys) {
+        if (StringUtils.isBlank(dtohys.getNombre())) {
             return new ResponseEntity(new Mensaje("El nombre es requerido"), HttpStatus.BAD_REQUEST);
         }
-        if (sExperience.existsByNameE(dtoexp.getNameE())) {
-            return new ResponseEntity(new Mensaje("La experiencia ya existe"), HttpStatus.BAD_REQUEST);
+        if (sHyS.existsByNombre(dtohys.getNombre())) {
+            return new ResponseEntity(new Mensaje("La skill ya existe"), HttpStatus.BAD_REQUEST);
         }
-        Experience experience = new Experience(dtoexp.getNameE(), dtoexp.getDescriptionE());
-        sExperience.save(experience);
+        HyS hys = new HyS(dtohys.getNombre(), dtohys.getPorcentaje());
+        sHyS.save(hys);
 
         return new ResponseEntity(new Mensaje("Experiencia creada"), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoExperience dtoexp) {
-        if (!sExperience.existsById(id)) {
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody dtoHyS dtohys) {
+        if (!sHyS.existsById(id)) {
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
         }
 
-        if (sExperience.existsByNameE(dtoexp.getNameE()) && sExperience.getByNameE(dtoexp.getNameE()).get().getId() != id) {
-            return new ResponseEntity(new Mensaje("La experiencia ya existe"), HttpStatus.BAD_REQUEST);
+        if (sHyS.existsByNombre(dtohys.getNombre()) && sHyS.getByNombre(dtohys.getNombre()).get().getId() != id) {
+            return new ResponseEntity(new Mensaje("La skill ya existe"), HttpStatus.BAD_REQUEST);
         }
 
-        if (StringUtils.isBlank(dtoexp.getNameE())) {
+        if (StringUtils.isBlank(dtohys.getNombre())) {
             return new ResponseEntity(new Mensaje("El nombre es requerido"), HttpStatus.BAD_REQUEST);
         }
 
-        Experience experience = sExperience.getOne(id).get();
-        experience.setNameE(dtoexp.getNameE());
-        experience.setDescriptionE(dtoexp.getDescriptionE());
+        HyS hys = sHyS.getOne(id).get();
+        hys.setNombre(dtohys.getNombre());
+        hys.setPorcentaje(dtohys.getPorcentaje());
 
-        sExperience.save(experience);
-        return new ResponseEntity(new Mensaje("Experiencia actualizada"), HttpStatus.OK);
+        sHyS.save(hys);
+        return new ResponseEntity(new Mensaje("Skill actualizada"), HttpStatus.OK);
 
     }
-    
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
-        if (!sExperience.existsById(id)) {
+        if (!sHyS.existsById(id)) {
             return new ResponseEntity(new Mensaje("El ID no existe"), HttpStatus.BAD_REQUEST);
         }
-        sExperience.delete(id);
-        return new ResponseEntity(new Mensaje("Experiencia eliminada"), HttpStatus.OK);
+        sHyS.delete(id);
+        return new ResponseEntity(new Mensaje("Skill eliminada"), HttpStatus.OK);
     }
 }

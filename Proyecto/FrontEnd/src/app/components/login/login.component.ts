@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
         this.isLogginFail = true;
         this.isLogged = false;
         console.log(this.errMsj);
+        alert("Error al iniciar sesión.");
       }
     );
   }

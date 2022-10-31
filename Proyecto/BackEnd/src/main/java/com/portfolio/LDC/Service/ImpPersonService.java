@@ -1,9 +1,10 @@
 package com.portfolio.LDC.Service;
 
 import com.portfolio.LDC.Entity.Person;
-import com.portfolio.LDC.Interface.IPersonService;
 import com.portfolio.LDC.Repository.IPersonRepository;
 import java.util.List;
+import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,29 +13,37 @@ import org.springframework.stereotype.Service;
  * @author lucas
  */
 @Service
-public class ImpPersonService implements IPersonService{
-    @Autowired IPersonRepository ipersonRepository;
-    
-    @Override
-    public List<Person> getPerson() {
-        List<Person> person = ipersonRepository.findAll();
-        return person;
+@Transactional
+public class ImpPersonService {
+
+    @Autowired
+    IPersonRepository ipersonRepository;
+
+    public List<Person> list() {
+        return ipersonRepository.findAll();
     }
 
-    @Override
-    public void savePerson(Person person) {
+    public Optional<Person> getOne(int id) {
+        return ipersonRepository.findById(id);
+    }
+
+    public Optional<Person> getByFirstName(String firstName) {
+        return ipersonRepository.findByFirstName(firstName);
+    }
+
+    public void save(Person person) {
         ipersonRepository.save(person);
     }
 
-    @Override
-    public void deletePerson(Long id) {
+    public void delete(int id) {
         ipersonRepository.deleteById(id);
     }
 
-    @Override
-    public Person findPerson(Long id) {
-        Person person = ipersonRepository.findById(id).orElse(null);
-        return person;
+    public boolean existsById(int id) {
+        return ipersonRepository.existsById(id);
     }
-    
+
+    public boolean existsByFirstName(String firstName) {
+        return ipersonRepository.existsByFirstName(firstName);
+    }
 }
